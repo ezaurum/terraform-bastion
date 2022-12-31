@@ -40,7 +40,7 @@ resource "aws_instance" "bastion" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
 
-  subnet_id = var.aws_subnet_public_a
+  subnet_id = var.subnet_id
 
   associate_public_ip_address = true
 
@@ -50,10 +50,6 @@ resource "aws_instance" "bastion" {
     aws_security_group.bastion.id
   ]
 
-  tags = {
-    Name = "${var.organization}-${var.stage}-bastion"
-    Organization = var.organization
-    Stage = var.stage
-  }
+  tags = var.tags
 }
 

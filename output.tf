@@ -1,5 +1,5 @@
 output "bastion_server_connect" {
-  value = "ssh -p ${var.ssh_port} -i ${var.generated_key_name}.pem ${var.aws_user}@${aws_instance.bastion.public_dns}"
+  value = "ssh -i ${var.generated_key_name}.pem ubuntu@${aws_instance.bastion.public_dns}"
 }
 
 output "private_key" {
