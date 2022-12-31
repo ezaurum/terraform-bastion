@@ -13,7 +13,7 @@ resource "aws_key_pair" "generated_key" {
       chmod 400 ./'${var.generated_key_name}'.pem
     EOT
   }
-  tags = merge(var.tags, { name: "${var.tags.name}-keypair",})
+  tags = merge(var.tags, { name: var.generated_key_name})
 }
 
 data "aws_ami" "ubuntu" {
