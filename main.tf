@@ -13,11 +13,7 @@ resource "aws_key_pair" "generated_key" {
       chmod 400 ./'${var.generated_key_name}'.pem
     EOT
   }
-  tags = {
-    Name = "${var.organization}-${var.stage}-keypair"
-    Organization = var.organization
-    Stage = var.stage
-  }
+  tags = merge(var.tags, { name: "${var.tags.name}-keypair",})
 }
 
 data "aws_ami" "ubuntu" {
@@ -50,6 +46,5 @@ resource "aws_instance" "bastion" {
     aws_security_group.bastion.id
   ]
 
-  tags = var.tags
+  tags = merge(var.tags, { name: "${var.tags.name}-bastion-ec2",})
 }
-
